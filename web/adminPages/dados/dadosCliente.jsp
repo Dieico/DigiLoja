@@ -9,6 +9,22 @@
 <html lang="en">
 
     <jsp:include page="../../components/head.jsp" flush="true"></jsp:include>
+
+    <script>
+    var opcoes;
+        
+    function loadXMLDoc() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          opcoes = JSON.parse(this.responseText);
+        }
+      };
+      xhttp.open("GET", "http://localhost:8080/DigiLoja/pegarClientes?nome=\"Diego\"", true);
+      xhttp.send();
+    }
+    </script>
+
         <body>
 
         <jsp:include page="../../components/nav.jsp" flush="true"></jsp:include>

@@ -7,20 +7,24 @@ package model.cliente;
 
 /**
  *
- * @author leoomoreira
+ * @author diego
  */
 public class ClienteModel {
-
+    
+    public Cliente showPerfil( int id ){
+        ClienteDAO d = new ClienteDAO();
+        Cliente c = d.listarCliente(id);
+        return c;
+    }
+    
+    public boolean inserir(String nome, String endereco, String email, String login, String senha) {
+        ClienteDAO dao = new ClienteDAO();
+        return dao.inserir(nome, endereco, login, senha, email);
+    }
+    
     public Cliente verificarSessao(String login, String senha) {
-        Cliente cliente = null;
-              
-        if (login != null && senha != null && login.equals(senha)) {
-            cliente = new Cliente();
-            cliente.setLogin(login);
-            cliente.setSenha(senha);
-        }
-        
-        return cliente;
+        ClienteDAO dao = new ClienteDAO();
+        return dao.listarCliente(login, senha);
     }
     
 }

@@ -4,6 +4,8 @@
     Author     : diego
 --%>
 
+<%@page import="model.cliente.Cliente"%>
+<% Cliente cliente = (Cliente) request.getAttribute("cliente"); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,11 +40,11 @@
                 <div class="col-lg-9 mb-4">
                     <h2>Informações do Usuário</h2>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nome: <b>Leonardo Moreira</b></li>
-                        <li class="list-group-item">Login: <b>leo</b></li>
+                        <li class="list-group-item">Nome: <b> <%= cliente.getNome() %> </b></li>
+                        <li class="list-group-item">Login: <b> <%= cliente.getLogin() %> </b></li>
                         <!-- <li class="list-group-item">Senha <b>Senha</b></li> -->
-                        <li class="list-group-item">Email cadastrado: <b>leo@virtual.ufc.br</b></li>
-                        <li class="list-group-item">Endereço: <b>Pici</b></li>
+                        <li class="list-group-item">Email cadastrado: <b> <%= cliente.getEmail() %> </b></li>
+                        <li class="list-group-item">Endereço: <b> <%= cliente.getEndereco() %> </b></li>
                     </ul>
 
                 </div>

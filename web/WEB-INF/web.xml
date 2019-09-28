@@ -8,6 +8,34 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controle.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GerenciarCategoriaServlet</servlet-name>
+        <servlet-class>controle.GerenciarCategoriaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListarClientesServlet</servlet-name>
+        <servlet-class>controle.ListarClientesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClienteShowServlet</servlet-name>
+        <servlet-class>controle.ClienteShowServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClienteServlet</servlet-name>
+        <servlet-class>controle.ClienteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientePerfilServlet</servlet-name>
+        <servlet-class>controle.ClientePerfilServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClienteRegisterServlet</servlet-name>
+        <servlet-class>controle.ClienteRegisterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LooginServlet</servlet-name>
+        <servlet-class>controle.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -15,6 +43,26 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GerenciarCategoriaServlet</servlet-name>
+        <url-pattern>/adminPages/categoria/gerenciarCategoria</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListarClientesServlet</servlet-name>
+        <url-pattern>/pegarClientes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientePerfilServlet</servlet-name>
+        <url-pattern>/perfilPages/perfil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClienteRegisterServlet</servlet-name>
+        <url-pattern>/DigiLoja/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LooginServlet</servlet-name>
+        <url-pattern>/DigiLoja/login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

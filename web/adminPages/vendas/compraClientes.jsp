@@ -51,8 +51,9 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <% for( int i = 0; i<100; i++ ) { %>
                                 <tr>
-                                    <th scope="row">1</th>
+                                    <th scope="row"> <%= i %>  </th>
                                     <td><img src="http://placehold.it/50x50" class="img-fluid img-thumbnail max-width: 10%"
                                              alt="Responsive image"></td>
                                     <td>Nome do Item</td>
@@ -64,6 +65,7 @@
                                     </td>
                                     <td>R$ 0.00</td>
                                 </tr>
+                                <% } %>
                             </tbody>
                         </table>
                     <jsp:include page="../../components/pages.jsp" flush="true"></jsp:include>

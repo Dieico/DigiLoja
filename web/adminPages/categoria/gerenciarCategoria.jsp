@@ -4,7 +4,12 @@
     Author     : diego
 --%>
 
+<%@page import="java.util.List"%>
+<%@page import="entidades.Categoria"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%--Aqui eu to recebendo do Servlet--%>
+<% List<Categoria> categorias = (List<Categoria>) request.getAttribute("categorias"); %>
 <html lang="en">
 
     <jsp:include page="../../components/head.jsp" flush="true"></jsp:include>
@@ -36,6 +41,7 @@
                     <jsp:include page="/adminPages/menuLateral.jsp" flush="true"></jsp:include>
                     </div>
 
+                    <%= categorias %>
                     <!-- Content Column -->
                     <div class="col-lg-9 mb-4">
                         <h2>Categorias</h2>
@@ -60,62 +66,35 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>Nome da Categoria</th>
-                                    <td>Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon
-                                        Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon Lorem Ypsilon</td>
-                                    <td><button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample"
-                                                aria-expanded="false" aria-controls="collapseExample">Alterar</button></td>
-                                    <td><button type="button" class="btn btn-dark">Remover</button></td>
-                                </tr>
-                                <tr class="collapse" id="collapseExample">
-                                    <td colspan="4">
-                                        <div class="card card-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Nome da Categoria</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                           placeholder="Nome da Categoria">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Descrição da Categoria</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                              placeholder="Descrição da Categoria"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Alterar Categoria</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Nome da Categoria</th>
-                                    <td>Lorem Ypsilon</td>
-                                    <td><button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample2"
-                                                aria-expanded="false" aria-controls="collapseExample2">Alterar</button></td>
-                                    <td><button type="button" class="btn btn-dark">Remover</button></td>
-                                </tr>
-                                <tr class="collapse" id="collapseExample2">
-                                    <td colspan="4">
-                                        <div class="card card-body">
-                                            <form>
-                                                <div class="form-group">
-                                                    <label for="exampleInputEmail1">Nome da Categoria</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                                           placeholder="Nome da Categoria">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="exampleInputPassword1">Descrição da Categoria</label>
-                                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                              placeholder="Descrição da Categoria"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Alterar Categoria</button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <% for( Categoria categoria : categorias ) { %>
+                                    <tr>
+                                        <td><%= categoria.getDescricao() %></td>
+                                        <td><button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#collapseExample"
+                                                    aria-expanded="false" aria-controls="collapseExample">Alterar</button></td>
+                                        <td><button type="button" class="btn btn-dark">Remover</button></td>
+                                    </tr>
+                                    <tr class="collapse" id="collapseExample">
+                                        <td colspan="4">
+                                            <div class="card card-body">
+                                                <form>
+    <!--                                                <div class="form-group">
+                                                        <label for="exampleInputEmail1">Nome da Categoria</label>
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                                               placeholder="Nome da Categoria">
+                                                    </div>-->
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Descrição da Categoria</label>
+                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                                                  placeholder="Descrição da Categoria"></textarea>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Alterar Categoria</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% } %>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
 
