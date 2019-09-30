@@ -10,7 +10,6 @@
         <html lang="en">
 
         <jsp:include page="components/head.jsp" flush="true"></jsp:include>
-
         <body>
 
             <jsp:include page="components/nav.jsp" flush="true"></jsp:include>

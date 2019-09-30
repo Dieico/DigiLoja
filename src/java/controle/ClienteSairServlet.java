@@ -5,23 +5,19 @@
  */
 package controle;
 
-import model.categoria.Categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.categoria.CategoriaNegocio;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author diego
  */
-public class ListarClientesServlet extends HttpServlet {
+public class ClienteSairServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,24 +28,12 @@ public class ListarClientesServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nome = (String) request.getParameter("nome");
-  
-        CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-        List<Categoria> categorias = categoriaNegocio.listar();
-       
-        PrintWriter out = response.getWriter();
-        JSONArray messages = new JSONArray();
+        HttpSession session = request.getSession();
+        session.invalidate(); 
+        request.getRequestDispatcher("index.jsp").forward(request, response);
+    }
 
-        for(Categoria categoria : categorias) {
-            JSONObject obj = new JSONObject();
-            obj.put("descricao", categoria.getDescricao());
-            messages.add(obj);
-        }
-        
-        out.print(messages);
-        
-   }
-    
 }

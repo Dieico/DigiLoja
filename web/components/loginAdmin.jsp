@@ -6,10 +6,10 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-    <div class="card-header">Login</div>
+    <div class="card-header">Login Administrador</div>
     <div class="card-body">        
 
-        <form action="login" method="post">
+        <form action="AdminLogin" method="post">
             <div><input type="text" name="login" placeholder="Login" /></div>
             <div><input type="password" name="senha" placeholder="Senha" /></div>
             <div><input type="submit" value="Login" /></div>

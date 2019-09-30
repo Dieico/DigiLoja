@@ -15,7 +15,9 @@
                 <div class="card card-register mx-auto mt-5">
                     <div class="card-header">Cadastrar</div>
                     <div class="card-body">
-                        <form action="DigiLoja/register" method="post">
+                        
+                        <form action="register" method="post">
+                            
                             <div><input type="text" name="nome" placeholder="Nome" /></div>
                             <div><input type="text" name="endereco" placeholder="Endereço" /></div>
                             <div><input type="text" name="email" placeholder="E-mail" /></div>

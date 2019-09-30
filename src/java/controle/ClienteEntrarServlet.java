@@ -6,18 +6,19 @@
 package controle;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.cliente.Cliente;
 import model.cliente.ClienteModel;
 
 /**
  *
  * @author diego
  */
-public class ClienteRegisterServlet extends HttpServlet {
+public class ClienteEntrarServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,21 +32,21 @@ public class ClienteRegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // entrada
-        String nome = request.getParameter("nome");
-        String endereco = request.getParameter("endereco");
-        String email = request.getParameter("email");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         // processamento
         ClienteModel clienteModel = new ClienteModel();
-        boolean sucesso = clienteModel.inserir(nome, endereco, email, login, senha);
+        Cliente cliente = clienteModel.verificarSessao(login, senha);
         // saída
-        if (sucesso) {
-            request.setAttribute("mensagem", "Cliente cadastrado com sucesso");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);;
+        if (cliente == null) {
+            // errou o login ou senha
+            request.setAttribute("mensagem", "Login ou senha incorreta");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
-            request.setAttribute("mensagem", "Não foi possível cadastrar este cliente");
-            request.getRequestDispatcher("/DigiLoja/index.jsp").forward(request, response);
+            // acertou o login e a senha
+            HttpSession session = request.getSession();
+            session.setAttribute("cliente", cliente);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

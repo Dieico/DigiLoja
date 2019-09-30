@@ -140,7 +140,8 @@ public class ClienteDAO {
         boolean resultado = false;
         try {
             Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = DriverManager.getConnection
+        (JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
             PreparedStatement preparedStatement = connection.prepareStatement
         ("INSERT INTO cliente (nome, endereco, login, senha, email) VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, nome);
@@ -200,7 +201,8 @@ public class ClienteDAO {
         try {
             Class.forName(JDBC_DRIVER);
             Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM cliente WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement
+            ("DELETE FROM cliente WHERE id = ?");
             preparedStatement.setInt(1, id);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();

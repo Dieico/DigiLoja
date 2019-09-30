@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="model.cliente.Cliente"%>
-<% Cliente cliente = (Cliente) request.getAttribute("cliente"); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,14 +37,20 @@
 
                 <!-- Content Column -->
                 <div class="col-lg-9 mb-4">
+                    <%
+                        Cliente cliente = (Cliente) session.getAttribute("cliente");                        
+                        if (cliente != null) {
+                    %>
                     <h2>Informações do Usuário</h2>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Nome: <b> <%= cliente.getNome() %> </b></li>
-                        <li class="list-group-item">Login: <b> <%= cliente.getLogin() %> </b></li>
-                        <!-- <li class="list-group-item">Senha <b>Senha</b></li> -->
-                        <li class="list-group-item">Email cadastrado: <b> <%= cliente.getEmail() %> </b></li>
-                        <li class="list-group-item">Endereço: <b> <%= cliente.getEndereco() %> </b></li>
+                        <li class="list-group-item">Nome: <b> <%= cliente.getNome()%> </b></li>
+                        <li class="list-group-item">Login: <b> <%= cliente.getLogin()%> </b></li>                        
+                        <li class="list-group-item">Email cadastrado: <b> <%= cliente.getEndereco()%> </b></li>
+                        <li class="list-group-item">Endereço: <b> <%= cliente.getEndereco()%> </b></li>
                     </ul>
+                    <%
+                        }
+                    %>
 
                 </div>
 
