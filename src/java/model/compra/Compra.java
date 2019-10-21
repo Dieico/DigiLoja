@@ -17,6 +17,9 @@ public class Compra {
     private int id;
     private Timestamp data;
     private int cliente;
+    
+     public Compra() {
+    }
 
     public Compra(int id, Timestamp data, int cliente) {
         this.id = id;
@@ -24,9 +27,7 @@ public class Compra {
         this.cliente =  cliente;
     }
 
-    Compra() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }     
+   
 
     public int getId() {
         return id;

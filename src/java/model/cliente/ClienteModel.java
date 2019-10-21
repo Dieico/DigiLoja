@@ -27,4 +27,9 @@ public class ClienteModel {
         return dao.listarCliente(login, senha);
     }
     
+    public boolean alterar (int id, String nome, String endereco, String login, String senha, String email){
+        ClienteDAO dao = new ClienteDAO();
+        return dao.alterar(id, nome, endereco, login, senha, email);
+    }
+    
 }

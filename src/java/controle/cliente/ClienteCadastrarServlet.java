@@ -3,22 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controle;
+package controle.cliente;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.cliente.Cliente;
 import model.cliente.ClienteModel;
 
 /**
  *
  * @author diego
  */
-public class ClienteEntrarServlet extends HttpServlet {
+public class ClienteCadastrarServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,21 +31,21 @@ public class ClienteEntrarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // entrada
+        String nome = request.getParameter("nome");
+        String endereco = request.getParameter("endereco");
+        String email = request.getParameter("email");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         // processamento
         ClienteModel clienteModel = new ClienteModel();
-        Cliente cliente = clienteModel.verificarSessao(login, senha);
+        boolean sucesso = clienteModel.inserir(nome, endereco, email, login, senha);
         // saída
-        if (cliente == null) {
-            // errou o login ou senha
-            request.setAttribute("mensagem", "Login ou senha incorreta");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        if (sucesso) {
+            request.setAttribute("mensagem", "Cliente cadastrado com sucesso");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
         } else {
-            // acertou o login e a senha
-            HttpSession session = request.getSession();
-            session.setAttribute("cliente", cliente);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.setAttribute("mensagem", "Não foi possível cadastrar este cliente");
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
     }
 

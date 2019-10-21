@@ -2,27 +2,39 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>GerenciarCategoriaServlet</servlet-name>
-        <servlet-class>controle.GerenciarCategoriaServlet</servlet-class>
+        <servlet-class>controle.categoria.GerenciarCategoriaServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ClientePerfilServlet</servlet-name>
-        <servlet-class>controle.ClientePerfilServlet</servlet-class>
+        <servlet-class>controle.cliente.ClientePerfilServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ClienteEntrarServlet</servlet-name>
-        <servlet-class>controle.ClienteEntrarServlet</servlet-class>
+        <servlet-class>controle.cliente.ClienteEntrarServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ClienteCadastrarServlet</servlet-name>
-        <servlet-class>controle.ClienteCadastrarServlet</servlet-class>
+        <servlet-class>controle.cliente.ClienteCadastrarServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ClienteSairServlet</servlet-name>
-        <servlet-class>controle.ClienteSairServlet</servlet-class>
+        <servlet-class>controle.cliente.ClienteSairServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminEntrarServlet</servlet-name>
-        <servlet-class>controle.AdminEntrarServlet</servlet-class>
+        <servlet-class>controle.admin.AdminEntrarServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuscaInicialServlet</servlet-name>
+        <servlet-class>controle.cliente.BuscaInicialServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createCategoriaservlet</servlet-name>
+        <servlet-class>controle.categoria.createCategoriaservlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClienteEditarServlet</servlet-name>
+        <servlet-class>controle.cliente.ClienteEditarServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GerenciarCategoriaServlet</servlet-name>
@@ -47,6 +59,22 @@
     <servlet-mapping>
         <servlet-name>AdminEntrarServlet</servlet-name>
         <url-pattern>/AdminLogin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscaInicialServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuscaInicialServlet</servlet-name>
+        <url-pattern/>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createCategoriaservlet</servlet-name>
+        <url-pattern>/createCategoriaservlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClienteEditarServlet</servlet-name>
+        <url-pattern>/perfilPages/editarDados</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

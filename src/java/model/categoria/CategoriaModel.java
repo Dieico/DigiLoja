@@ -14,7 +14,7 @@ import model.produto.Produto;
  *
  * @author aluno
  */
-public class CategoriaNegocio {
+public class CategoriaModel {
 
     public List<Categoria> listar() {
         CategoriaDAO categoriaDAO = new CategoriaDAO();
@@ -55,8 +55,8 @@ public class CategoriaNegocio {
     }
 
     public static void main(String[] args) {
-        CategoriaNegocio d = new CategoriaNegocio();
-        System.out.println(d.listaProdutoDe(2).get(2).getNome());
+        CategoriaModel d = new CategoriaModel();
+        System.out.println(d.listar().get(0));
     }
 ;
 }

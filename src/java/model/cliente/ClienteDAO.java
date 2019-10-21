@@ -5,6 +5,7 @@
  */
 package model.cliente;
 
+import database.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,11 +23,6 @@ import java.util.List;
  */
 public class ClienteDAO {
 
-    private static final String JDBC_DRIVER = "org.postgresql.Driver";
-    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/DigiLoja";
-    private static final String JDBC_USUARIO = "postgres";
-    private static final String JDBC_SENHA = "FATEzero";
-
     /**
      * Método utilizado para listar todos os clientes registrados
      *
@@ -35,8 +31,7 @@ public class ClienteDAO {
     public List<Cliente> listarClientes() {
         List<Cliente> resultado = new ArrayList<Cliente>();
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT id, nome, endereco, login, senha, email FROM cliente");
             while (resultSet.next()) {
@@ -67,8 +62,7 @@ public class ClienteDAO {
     public Cliente listarCliente(int id) {
         Cliente cliente = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareCall
         ("SELECT id, nome, endereco, login, senha, email FROM cliente WHERE id = ?");
             preparedStatement.setInt(1, id);
@@ -101,8 +95,7 @@ public class ClienteDAO {
     public Cliente listarCliente(String login, String senha) {
         Cliente cliente = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareCall
         ("SELECT id, nome, endereco, login, senha, email FROM cliente WHERE login = ? AND senha = ?");
             preparedStatement.setString(1, login);
@@ -112,10 +105,10 @@ public class ClienteDAO {
                 cliente = new Cliente();
                 cliente.setId(resultSet.getInt("id"));
                 cliente.setNome(resultSet.getString("nome"));
-                cliente.setSenha(resultSet.getString("endereco"));
-                cliente.setLogin(resultSet.getString("login"));
                 cliente.setSenha(resultSet.getString("senha"));
-                cliente.setSenha(resultSet.getString("email"));
+                cliente.setLogin(resultSet.getString("login"));
+                cliente.setEndereco(resultSet.getString("endereco"));
+                cliente.setEmail(resultSet.getString("email"));
             }
             resultSet.close();
             preparedStatement.close();
@@ -139,9 +132,7 @@ public class ClienteDAO {
     public boolean inserir(String nome, String endereco, String login, String senha, String email) {
         boolean resultado = false;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection
-        (JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement
         ("INSERT INTO cliente (nome, endereco, login, senha, email) VALUES (?, ?, ?, ?, ?)");
             preparedStatement.setString(1, nome);
@@ -172,8 +163,7 @@ public class ClienteDAO {
     public boolean alterar(int id, String nome, String endereco, String login, String senha, String email) {
         boolean resultado = false;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE cliente SET nome = ?, endereco = ?, login = ?, senha = ?, email = ? WHERE id = ?");
             preparedStatement.setString(1, nome);
             preparedStatement.setString(2, endereco);
@@ -199,8 +189,7 @@ public class ClienteDAO {
     public boolean deletar(int id) {
         boolean resultado = false;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement
             ("DELETE FROM cliente WHERE id = ?");
             preparedStatement.setInt(1, id);
@@ -211,6 +200,14 @@ public class ClienteDAO {
             return false;
         }
         return resultado;
+    }
+    
+    static public void main( String args[] ){
+        ClienteDAO dao = new ClienteDAO();
+//        ArrayList<Produto> lista = (ArrayList<Produto>) dao.listar("pal");
+        System.out.println(dao.listarClientes());
+//        for( Produto prod : lista )
+//            System.out.println(prod.getNome());
     }
 
 }

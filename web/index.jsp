@@ -3,7 +3,9 @@
     Created on : 16/09/2019, 15:05:00
     Author     : leoomoreira
 --%>
-
+<%@page import="model.produto.Produto"%>
+<%@page import="java.util.List"%>
+<% List<Produto> produtos = (List<Produto>) request.getAttribute("produtos"); %>
     <%@page contentType="text/html" pageEncoding="UTF-8"%>
         <!DOCTYPE html>
         
@@ -24,7 +26,14 @@
 
                 <!-- Marketing Icons Section -->
                 <div class="row">
-                    <jsp:include page="components/cards.jsp" flush="true"></jsp:include>
+                    <% for( Produto produto : produtos ) { %>
+                        <jsp:include page="components/cards.jsp" flush="true">
+                            <jsp:param name="nome" value="<%= produto.getNome() %>"/>
+                            <jsp:param name="descricao" value="<%= produto.getDescricao()%>"/>
+                            <jsp:param name="preco" value="<%= produto.getPreco()%>"/>
+                        </jsp:include>
+                    
+                    <% } %>
                 </div>
                 <jsp:include page="components/pages.jsp" flush="true"></jsp:include>
             </div>
@@ -34,4 +43,4 @@
 
         </body>
 
-        </html>
+       </html>

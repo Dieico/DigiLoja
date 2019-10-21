@@ -3,9 +3,13 @@
     Created on : 22/09/2019, 16:19:14
     Author     : diego
 --%>
-
+<%@page import="model.cliente.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    Cliente cliente = (Cliente) session.getAttribute("cliente");                        
+    if (cliente != null) {
+%>
 <html lang="en">
 
     <jsp:include page="../components/head.jsp" flush="true"></jsp:include>
@@ -41,23 +45,28 @@
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nome</label>
                                 <input type="text" class="form-control" id="exampleInputNome1" aria-describedby="nomehelp"
-                                       placeholder="Nome">
+                                       placeholder= <%= cliente.getNome()%>>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Login</label>
+                                <input type="text" class="form-control" id="exampleInputNome1" aria-describedby="nomehelp"
+                                       placeholder= <%= cliente.getLogin()%> >
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email Virtual</label>
                                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                       placeholder="Email Virtual">
+                                       placeholder=" <%= cliente.getEmail()%> ">
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Endereço</label>
                                 <input type="text" class="form-control" id="exampleInputEndereco1" aria-describedby="emailHelp"
-                                       placeholder="Endereço">
+                                       placeholder=" <%= cliente.getEndereco()%> ">
                                 <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Senha Atual</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha Atual">
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="<%= cliente.getSenha()%>">
                             </div>
                             <div class="form-group">
                                 <div class="form-row">
@@ -97,3 +106,7 @@
 
 </html>
 
+<% } else {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+%>

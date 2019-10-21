@@ -4,8 +4,13 @@
     Author     : leoomoreira
 --%>
 
+<%@page import="model.administrador.Administrador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    Administrador administrador = (Administrador) session.getAttribute("administrador");                        
+    if (administrador != null) {
+%>
 <html lang="en">
 
     <jsp:include page="components/head.jsp" flush="true"></jsp:include>
@@ -43,13 +48,15 @@
                     <div class="col-lg-9 mb-4">
                         <h2>Informações do Usuário</h2>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Nome: <b>Leonardo Moreira</b></li>
-                            <li class="list-group-item">Login: <b>leo</b></li>
+                            <!--<li class="list-group-item">Nome: <b>Leonardo Moreira</b></li>-->
+                            <!--<li class="list-group-item">Login: <b>leo</b></li>-->
                             <!-- <li class="list-group-item">Senha <b>Senha</b></li> -->
-                            <li class="list-group-item">Email: <b>leomoreira@virtual.ufc.br</b></li>
+                            <!--<li class="list-group-item">Email: <b>leomoreira@virtual.ufc.br</b></li>-->
                             <!-- <li class="list-group-item">Endereço <b>endereço</b></li> -->
+                            <li class="list-group-item">Nome: <b> <%= administrador.getNome()%> </b></li>
+                            <li class="list-group-item">Login: <b> <%= administrador.getLogin()%> </b></li>                        
+                            <li class="list-group-item">Email: <b> <%= administrador.getEmail()%> </b></li>
                         </ul>
-
                     </div>
 
                 </div>
@@ -64,3 +71,7 @@
     </body>
 
 </html>
+<% } else {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+%>

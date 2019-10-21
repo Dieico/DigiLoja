@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import database.Database;
 
 /**
  *
@@ -16,16 +17,10 @@ import java.sql.ResultSet;
  */
 public class AdministradorDAO {
 
-    private static final String JDBC_DRIVER = "org.postgresql.Driver";
-    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/DigiLoja";
-    private static final String JDBC_USUARIO = "postgres";
-    private static final String JDBC_SENHA = "FATEzero";
-
     public Administrador listaAdmins(int id) {
         Administrador administrador = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareCall("SELECT id, nome, endereco, login, senha, email FROM administrador WHERE id = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -56,8 +51,7 @@ public class AdministradorDAO {
     public Administrador listaAdmins(String login, String senha) {
         Administrador administrador = null;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareCall("SELECT id, nome, login, senha, email FROM administrador WHERE login = ? AND senha = ?");
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, senha);
@@ -68,7 +62,7 @@ public class AdministradorDAO {
                 administrador.setNome(resultSet.getString("nome"));                
                 administrador.setLogin(resultSet.getString("login"));
                 administrador.setSenha(resultSet.getString("senha"));
-                administrador.setSenha(resultSet.getString("email"));
+                administrador.setEmail(resultSet.getString("email"));
             }
             resultSet.close();
             preparedStatement.close();
@@ -89,21 +83,20 @@ public class AdministradorDAO {
      * @param email
      * @return
      */
-    public boolean inserir(String nome, String endereco, String login, String senha, String email) {
+    public boolean inserir(String nome, String login, String senha, String email) {
         boolean resultado = false;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO administrador (nome, endereco, login, senha, email) VALUES (?, ?, ?, ?, ?)");
+            Connection connection = Database.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO administrador (nome, login, senha, email) VALUES (?, ?, ?, ?)");
             preparedStatement.setString(1, nome);
-            preparedStatement.setString(2, endereco);
-            preparedStatement.setString(3, login);
-            preparedStatement.setString(4, senha);
-            preparedStatement.setString(5, email);
+            preparedStatement.setString(2, login);
+            preparedStatement.setString(3, senha);
+            preparedStatement.setString(4, email);
             resultado = (preparedStatement.executeUpdate() > 0);
             preparedStatement.close();
             connection.close();
         } catch (Exception ex) {
+            System.out.println( ex.toString());
             return false;
         }
         return resultado;
@@ -123,8 +116,7 @@ public class AdministradorDAO {
     public boolean alterar(int id, String nome, String endereco, String login, String senha, String email) {
         boolean resultado = false;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE administrador SET nome = ?, endereco = ?, login = ?, senha = ?, email = ? WHERE id = ?");
             preparedStatement.setString(1, nome);
             preparedStatement.setString(2, endereco);
@@ -150,8 +142,7 @@ public class AdministradorDAO {
     public boolean deletar(int id) {
         boolean resultado = false;
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM administrador WHERE id = ?");
             preparedStatement.setInt(1, id);
             resultado = (preparedStatement.executeUpdate() > 0);

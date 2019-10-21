@@ -22,7 +22,7 @@
         <link href="/DigiLoja/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
         <!-- Custom styles for this template-->
-        <link href="./css/sb-admin.css" rel="stylesheet">
+        <link href="http://localhost:8084/DigiLoja/css/sb-admin.css" rel="stylesheet">
         
         <!-- Custom styles for this template -->
         <link href="/DigiLoja/css/modern-business.css" rel="stylesheet">

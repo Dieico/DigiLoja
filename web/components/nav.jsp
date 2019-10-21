@@ -10,7 +10,7 @@
 <!-- Navigation -->
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="/DigiLoja/index.jsp">Vila dos Digiovos</a>
+        <a class="navbar-brand" href="/DigiLoja">Vila dos Digiovos</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -30,7 +30,7 @@
                     <a class="nav-link" href="/DigiLoja/perfilPages/perfil.jsp"><b><%= cliente.getNome()%></b></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/DigiLoja/Sair"><b>Sair</b></a>
+                    <a class="nav-link" href="Sair"><b>Sair</b></a>
                 </li>
 
                 <%

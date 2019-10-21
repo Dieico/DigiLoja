@@ -19,9 +19,7 @@ public class Cliente {
 
     public Cliente() {
     }
-    
-    
-
+   
     public Cliente(String login, String senha, String nome, String email, String endereco, int id) {
         this.login = login;
         this.senha = senha;

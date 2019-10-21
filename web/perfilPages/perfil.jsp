@@ -7,8 +7,11 @@
 <%@page import="model.cliente.Cliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    Cliente cliente = (Cliente) session.getAttribute("cliente");                        
+    if (cliente != null) {
+%>
 <html lang="en">
-
     <jsp:include page="../components/head.jsp" flush="true"></jsp:include>
         <body>
         <jsp:include page="../components/nav.jsp" flush="true"></jsp:include>
@@ -37,21 +40,13 @@
 
                 <!-- Content Column -->
                 <div class="col-lg-9 mb-4">
-                    <%
-                        Cliente cliente = (Cliente) session.getAttribute("cliente");                        
-                        if (cliente != null) {
-                    %>
                     <h2>Informações do Usuário</h2>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">Nome: <b> <%= cliente.getNome()%> </b></li>
                         <li class="list-group-item">Login: <b> <%= cliente.getLogin()%> </b></li>                        
-                        <li class="list-group-item">Email cadastrado: <b> <%= cliente.getEndereco()%> </b></li>
+                        <li class="list-group-item">Email cadastrado: <b> <%= cliente.getEmail()%> </b></li>
                         <li class="list-group-item">Endereço: <b> <%= cliente.getEndereco()%> </b></li>
                     </ul>
-                    <%
-                        }
-                    %>
-
                 </div>
 
             </div>
@@ -66,4 +61,7 @@
     </body>
 
 </html>
-
+<% } else {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+%>

@@ -4,7 +4,13 @@
     Author     : aluno
 --%>
 
+<%@page import="model.administrador.Administrador"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%
+    Administrador administrador = (Administrador) session.getAttribute("administrador");                        
+    if (administrador != null) {
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -107,3 +113,7 @@
     </body>
 
 </html>
+<% } else {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+%>

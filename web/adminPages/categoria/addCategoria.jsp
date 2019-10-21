@@ -39,21 +39,16 @@
 
                     <!-- Content Column -->
                     <div class="col-lg-9 mb-4">
-                        <h2>Adicionar Categoria</h2>
-                        <form>
+                        <h2>Adicionar Categoria</h2>                        
+                        <form action="/DigiLoja/createCategoriaservlet" method="post">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Nome da Categoria</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                       placeholder="Nome da Categoria">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Descrição da Categoria</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                          placeholder="Descrição da Categoria"></textarea>
+                                <label for="descricao">Nome da Categoria</label>
+                                <textarea class="form-control" name="descricao" rows="1" placeholder=""></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Adicionar Categoria</button>
                         </form>
-                    </div>
+                        <jsp:include page="../../components/feedback.jsp" flush="true"></jsp:include>
+                    </div>  
                 </div>
 
             </div>

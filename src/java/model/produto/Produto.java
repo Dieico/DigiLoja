@@ -18,6 +18,9 @@ public class Produto {
     private double preco;
     private int quantidade;
 
+    public Produto() {
+    }
+    
     public Produto(int id, String foto, String nome, String descricao, double preco, int quantidade) {
         this.id = id;
         this.foto = foto;
@@ -25,11 +28,6 @@ public class Produto {
         this.descricao = descricao;
         this.preco = preco;
         this.quantidade = quantidade;
-    }
-
-    Produto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
     }
 
     public int getId() {

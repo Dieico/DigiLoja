@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controle;
+package controle.cliente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import model.cliente.ClienteModel;
  *
  * @author diego
  */
-public class ClientePerfilServlet extends HttpServlet {
+public class ClienteEditarServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,17 +29,19 @@ public class ClientePerfilServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ClienteModel clienteGet = new ClienteModel();
         int id = Integer.parseInt( request.getParameter("id") );
         
         Cliente cliente = clienteGet.showPerfil(id);
         request.setAttribute("cliente", cliente);
-        request.getRequestDispatcher("/perfilPages/perfil.jsp").forward(request, response);
+        request.getRequestDispatcher("/perfilPages/editarDados.jsp").forward(request, response);
+        
+        String nome = request.getParameter("nome");
+        String endereco = request.getParameter("endereco");
+        String email = request.getParameter("email");
+        String login = request.getParameter("login");
+        String senha = request.getParameter("senha");
     }
-
-    
-
 }

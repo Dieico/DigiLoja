@@ -5,6 +5,7 @@
  */
 package model.compra;
 
+import database.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import model.cliente.Cliente;
 
 /**
  *
@@ -20,24 +22,17 @@ import java.util.List;
  */
 public class CompraDAO {
 
-    private static final String JDBC_DRIVER = "org.postgresql.Driver";
-    private static final String JDBC_URL = "jdbc:postgresql://localhost:5432/DigiLoja";
-    private static final String JDBC_USUARIO = "postgres";
-    private static final String JDBC_SENHA = "FATEzero";
-
-    public List<Compra> listarClientes() {
+    public List<Compra> listaCompras() {
         List<Compra> resultado = new ArrayList<Compra>();
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection(JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
+            Connection connection = Database.getConnection();
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery
-        ("SELECT id, data, id_cliente FROM compra");
+            ResultSet resultSet = statement.executeQuery("SELECT id, data, id_cliente FROM compra");
             while (resultSet.next()) {
                 Compra compra = new Compra();
                 compra.setId(resultSet.getInt("id"));
                 compra.setData(resultSet.getTimestamp("data"));
-                compra.setCliente(resultSet.getInt("id_cliente"));                
+                compra.setCliente(resultSet.getInt("id_cliente"));
                 resultado.add(compra);
             }
             resultSet.close();
@@ -48,24 +43,50 @@ public class CompraDAO {
         }
         return resultado;
     }
-    
-    public boolean inserir( Timestamp data, int id ) {
-        boolean resultado = false;
+
+    public List<Compra> ListaComprasDE(int id_cliente) {
+        List<Compra> resultado = new ArrayList<Compra>();
         try {
-            Class.forName(JDBC_DRIVER);
-            Connection connection = DriverManager.getConnection
-        (JDBC_URL, JDBC_USUARIO, JDBC_SENHA);
-            PreparedStatement preparedStatement = connection.prepareStatement
-        ("INSERT INTO compra (data, id) VALUES (?, ?)");
-            preparedStatement.setTimestamp(1, data);
-            preparedStatement.setInt(2, id);            
-            resultado = (preparedStatement.executeUpdate() > 0);
+            Connection connection = Database.getConnection();
+            PreparedStatement preparedStatement = connection.prepareCall
+        ("SELECT id_cliente, id, data FROM compra WHERE id_cliente =?");
+            preparedStatement.setInt(1, id_cliente);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Compra compra = new Compra();
+                compra.setId(resultSet.getInt("id"));
+                compra.setData(resultSet.getTimestamp("data"));
+                compra.setCliente(resultSet.getInt("id_cliente")); 
+                resultado.add(compra);
+            }
+            resultSet.close();
             preparedStatement.close();
             connection.close();
-        } catch (Exception ex) {
-            return false;
+        } catch (Exception ex) {            
+            return new ArrayList<Compra>();             
         }
         return resultado;
     }
 
+    public boolean inserir( int id_cliente ) {
+        boolean resultado = false;
+        try {
+            Connection connection = Database.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO compra (data, id_cliente) VALUES (current_timestamp, ?)");
+            preparedStatement.setInt(1, id_cliente);
+            resultado = (preparedStatement.executeUpdate() > 0);
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            return false;
+        }
+        return resultado;
+    }
+    
+    public static void main(String[] args) {
+        CompraDAO dao = new CompraDAO();
+        System.out.println(dao.ListaComprasDE(1));
+    }
+    
 }

@@ -3,24 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controle;
+package controle.cliente;
 
-import model.categoria.CategoriaDAO;
-import model.categoria.CategoriaNegocio;
-import model.categoria.Categoria;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author aluno
+ * @author diego
  */
-public class GerenciarCategoriaServlet extends HttpServlet {
+public class ClienteSairServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,9 +31,9 @@ public class GerenciarCategoriaServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-        List<Categoria> categorias = categoriaNegocio.listar();
-        request.setAttribute("categorias", categorias);
-        request.getRequestDispatcher("/adminPages/categoria/gerenciarCategoria.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.getRequestDispatcher("sacola.jsp").forward(request, response);
     }
+
 }
